@@ -2,9 +2,9 @@ import torch
 import random
 import numpy as np
 from collections import deque
-from game import SnakeGameAI, Direction, Point
-from model import Linear_QNet, QTrainer
-from helper import plot
+from SnakeMap.game import SnakeGameAI, Direction, Point
+from SnakeMap.model import Linear_QNet, QTrainer
+from SnakeMap.helper import plot
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
@@ -86,7 +86,7 @@ class Agent:
 
     def get_action(self, state):
         # random moves: tradeoff exploration / exploitation
-        self.epsilon = 120 - self.n_games
+        self.epsilon = 100 - self.n_games
         final_move = [0,0,0]
         if random.randint(0, 200) < self.epsilon:
             move = random.randint(0, 2)
