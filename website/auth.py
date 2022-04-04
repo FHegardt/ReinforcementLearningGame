@@ -20,4 +20,4 @@ def sign_up():
 
 @auth.route('/snake')
 def snake():
-    return render_template("reinforcement_snake.html", test = agent.train())
+    return render_template("reinforcement_snake.html", test = agent.train(), a = False)
