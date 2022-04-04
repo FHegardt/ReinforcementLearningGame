@@ -23,4 +23,4 @@ def sign_up():
 
 @auth.route('/snake')
 def snake():
-    return render_template("reinforcement_snake.html")
+    return render_template("reinforcement_snake.html", StartSnake = StartSnake)
