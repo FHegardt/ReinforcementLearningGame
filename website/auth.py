@@ -3,6 +3,9 @@ import sys
 sys.path.append('./SnakeMap')
 import agent
 
+def StartSnake():
+    return agent.train()
+
 
 auth = Blueprint('auth', __name__)
 
@@ -20,4 +23,4 @@ def sign_up():
 
 @auth.route('/snake')
 def snake():
-    return render_template("reinforcement_snake.html", test = agent.train(), a = False)
+    return render_template("reinforcement_snake.html")
