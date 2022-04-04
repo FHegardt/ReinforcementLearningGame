@@ -1,6 +1,6 @@
 from distutils.log import debug
 from venv import create
-from templates import create_app
+from website import create_app
 
 app = create_app()
 
