@@ -1,6 +1,35 @@
 {% extends "base.html" %} {% block title %}Reinforcement snake{% endblock %} {%
 block content%}
-<h1>This is the reinforcement learning snake</h1>
+<h1 align="left">Reinforcement Learning Snake</h1>
+<br />
+<h5 align="left">
+  You will be able to fill in your own parameters and create a snake that
+</h5>
+<h5 align="left">learns to play the game itself.</h5>
+<br />
+<h3 align="left">Exploration / Prediction</h3>
+<h6 align="left">
+  The lower value you choose the quicker the Snake will start to make choises
+  from the prediction model,
+</h6>
+<h6 align="left">
+  but will not explore as much and will not be as efficient in the long-term.
+  The higher value you choose
+</h6>
+<h6 align="left">
+  the more exploration / randomness it will have in the beginning but will be
+  give better predictions in the long-term.
+</h6>
+<div class="slidecontainer">
+  <input
+    type="range"
+    min="1"
+    max="100"
+    value="50"
+    class="slider"
+    id="myRange"
+  />
+</div>
 <br />
 <button type="submit" class="btn btn-primary">Try your model</button>
 {%endblock%}
