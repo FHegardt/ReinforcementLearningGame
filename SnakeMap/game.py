@@ -53,10 +53,10 @@ class SnakeGameAI:
                       Point(self.head.x-BLOCK_SIZE, self.head.y),
                       Point(self.head.x-(2*BLOCK_SIZE), self.head.y)]
         
-        self.score = 10
+        self.score = 0
         self.food = None
         self._place_food()
-        self.frame_iteration = 10
+        self.frame_iteration = 0
         
         
     def _place_food(self):
@@ -84,13 +84,13 @@ class SnakeGameAI:
         game_over = False
         if self.is_collision() or self.frame_iteration > 100*len(self.snake):
             game_over = True
-            reward = -8
+            reward = -12
             return reward, game_over, self.score
             
         # 4. place new food or just move
         if self.head == self.food:
             self.score += 1
-            reward = 15
+            reward = 10
             self._place_food()
         else:
             self.snake.pop()
