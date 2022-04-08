@@ -6,8 +6,8 @@ from game import SnakeGameAI, Direction, Point
 from model import Linear_QNet, QTrainer
 from helper import plot
 
-MAX_MEMORY = 100_000
-BATCH_SIZE = 1000
+MAX_MEMORY = 100_0000
+BATCH_SIZE = 10000
 LR = 0.001
 
 class Agent:
@@ -17,7 +17,7 @@ class Agent:
         self.epsilon = 0 # randomness
         self.gamma = 0.9 # discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
-        self.model = Linear_QNet(11, 4096, 3)
+        self.model = Linear_QNet(11, 512, 3)
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
 
@@ -86,8 +86,13 @@ class Agent:
 
     def get_action(self, state):
         # random moves: tradeoff exploration / exploitation
-        self.epsilon = 180 - self.n_games
+        self.epsilon = 200 - self.n_games
         final_move = [0,0,0]
+        if self.n_games > 300 and self.n_games < 500:
+            if random.randint(250, 500) > self.n_games:
+                move = random.randint(0, 2)
+                final_move[move] = 1
+
         if random.randint(0, 200) < self.epsilon:
             move = random.randint(0, 2)
             final_move[move] = 1
@@ -103,7 +108,7 @@ class Agent:
 def train():
     plot_scores = []
     plot_mean_scores = []
-    total_score = 0
+    total_score = []
     record = 0
     agent = Agent()
     game = SnakeGameAI()
@@ -137,8 +142,8 @@ def train():
             print('Game', agent.n_games, 'Score', score, 'Record:', record)
             
             plot_scores.append(score)
-            total_score += score
-            mean_score = total_score / agent.n_games
+            total_score.append(score)
+            mean_score = sum(total_score[(agent.n_games-20):agent.n_games])/ 20
             plot_mean_scores.append(mean_score)
             plot(plot_scores, plot_mean_scores)
 
