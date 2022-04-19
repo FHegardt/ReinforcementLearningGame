@@ -88,10 +88,22 @@ class Agent:
         # random moves: tradeoff exploration / exploitation
         self.epsilon = 200 - self.n_games
         final_move = [0,0,0]
-        if self.n_games > 300 and self.n_games < 500:
-            if random.randint(250, 500) > self.n_games:
-                move = random.randint(0, 2)
-                final_move[move] = 1
+        if self.n_games > 200 and self.n_games < 300:
+                if random.randint(0, 300) > self.n_games:
+                    move = random.randint(0, 2)
+                    final_move[move] = 1
+        if self.n_games > 350 and self.n_games < 450:
+                if random.randint(0, 450) > self.n_games:
+                    move = random.randint(0, 2)
+                    final_move[move] = 1
+        if self.n_games > 500 and self.n_games < 600:
+                if random.randint(0, 600) > self.n_games:
+                    move = random.randint(0, 2)
+                    final_move[move] = 1
+        if self.n_games > 700 and self.n_games < 800:
+                if random.randint(0, 800) > self.n_games:
+                    move = random.randint(0, 2)
+                    final_move[move] = 1
 
         if random.randint(0, 200) < self.epsilon:
             move = random.randint(0, 2)
