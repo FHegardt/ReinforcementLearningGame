@@ -1,35 +1,57 @@
 {% extends "base.html" %} {% block title %}Reinforcement snake{% endblock %} {%
 block content%}
 <h1 align="left">Reinforcement Learning Snake</h1>
+<h5 align="left">Upload you best model and compete against your classmates!</h5>
 <br />
-<h5 align="left">
-  You will be able to fill in your own parameters and create a snake that
-</h5>
-<h5 align="left">learns to play the game itself.</h5>
 <br />
-<h3 align="left">Exploration / Prediction</h3>
+<h4 align="left">The game</h4>
 <h6 align="left">
-  The lower value you choose the quicker the Snake will start to make choises
-  from the prediction model,
+  Your model will run 20 games per row and you will be evaluated in two
 </h6>
 <h6 align="left">
-  but will not explore as much and will not be as efficient in the long-term.
-  The higher value you choose
+  categories; "Single highest score" and "Average of 5 best games". The
 </h6>
-<h6 align="left">
-  the more exploration / randomness it will have in the beginning but will be
-  give better predictions in the long-term.
-</h6>
-<div class="slidecontainer">
-  <input
-    type="range"
-    min="1"
-    max="100"
-    value="50"
-    class="slider"
-    id="myRange"
-  />
-</div>
+<h6 align="left">score will be seen on the Highscore to the left.</h6>
 <br />
-<button type="submit" class="btn btn-primary">Try your model</button>
+
+<form method="POST">
+  <div class="form-group">
+    <label for="firstName">Your name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="firstName"
+      name="firstName"
+      placeholder='ex. "Fredrik"'
+    />
+  </div>
+  <div class="form-group">
+    <label for="modelName">You models name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="modelName"
+      name="modelName"
+      placeholder='ex. "Snakenator 2.0"'
+    />
+  </div>
+</form>
+<br />
+<h5 align="left">Upload you "model.pth" file.</h5>
+<html>
+  <body>
+    <form
+      action="http://localhost:5000/uploader"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="file" />
+      <input type="submit" />
+    </form>
+    <br />
+    <h6 align="left">Note: It must be named "model.pth"</h6>
+    <br />
+    <button type="submit" class="btn btn-primary">Run your model!</button>
+  </body>
+</html>
 {%endblock%}

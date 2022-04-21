@@ -69,6 +69,14 @@ class SnakeGameAI:
     def play_step(self, action):
         self.frame_iteration += 1
         # 1. collect user input
+        # Create image surface
+        #pygame.image.save(self.display, "apa.png")
+        #import matplotlib.pyplot as plt
+        #import matplotlib.image as mpimg
+        #img = mpimg.imread('apa.png')
+        #plt.imshow(img)
+        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -84,13 +92,13 @@ class SnakeGameAI:
         game_over = False
         if self.is_collision() or self.frame_iteration > 100*len(self.snake):
             game_over = True
-            reward = -12
+            reward = -8
             return reward, game_over, self.score
             
         # 4. place new food or just move
         if self.head == self.food:
             self.score += 1
-            reward = 8
+            reward = 14
             self._place_food()
         else:
             self.snake.pop()

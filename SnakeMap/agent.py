@@ -1,3 +1,4 @@
+import pygame
 import torch
 import random
 import numpy as np
@@ -17,7 +18,9 @@ class Agent:
         self.epsilon = 0 # randomness
         self.gamma = 0.9 # discount rate
         self.memory = deque(maxlen=MAX_MEMORY) # popleft()
-        self.model = Linear_QNet(11, 512, 3)
+        self.model = Linear_QNet(11, 256, 3)
+        self.model.load_state_dict(torch.load('./SnakeMap/model/model.pth'))
+        self.model.eval()
         self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
 
@@ -86,26 +89,26 @@ class Agent:
 
     def get_action(self, state):
         # random moves: tradeoff exploration / exploitation
-        self.epsilon = 200 - self.n_games
+        self.epsilon = 0 - self.n_games
         final_move = [0,0,0]
-        if self.n_games > 200 and self.n_games < 300:
-                if random.randint(0, 300) > self.n_games:
-                    move = random.randint(0, 2)
-                    final_move[move] = 1
-        if self.n_games > 350 and self.n_games < 450:
-                if random.randint(0, 450) > self.n_games:
-                    move = random.randint(0, 2)
-                    final_move[move] = 1
-        if self.n_games > 500 and self.n_games < 600:
-                if random.randint(0, 600) > self.n_games:
-                    move = random.randint(0, 2)
-                    final_move[move] = 1
-        if self.n_games > 700 and self.n_games < 800:
-                if random.randint(0, 800) > self.n_games:
-                    move = random.randint(0, 2)
-                    final_move[move] = 1
+        #if self.n_games > 250 and self.n_games < 300:
+                #if random.randint(0, 300) > self.n_games:
+                    #move = random.randint(0, 2)
+                   # final_move[move] = 1
+        #if self.n_games > 350 and self.n_games < 400:
+                #if random.randint(0, 400) > self.n_games:
+                   # move = random.randint(0, 2)
+                    #final_move[move] = 1
+        #if self.n_games > 450 and self.n_games < 500:
+                #if random.randint(0, 500) > self.n_games:
+                   # move = random.randint(0, 2)
+                    #final_move[move] = 1
+        #if self.n_games > 600 and self.n_games < 750:
+                #if random.randint(0, 750) > self.n_games:
+                    #move = random.randint(0, 2)
+                   # final_move[move] = 1
 
-        if random.randint(0, 200) < self.epsilon:
+        if random.randint(0, 250) < self.epsilon:
             move = random.randint(0, 2)
             final_move[move] = 1
         else:
@@ -113,6 +116,8 @@ class Agent:
             prediction = self.model(state0)
             move = torch.argmax(prediction).item()
             final_move[move] = 1
+        
+            
 
         return final_move
 
@@ -149,9 +154,10 @@ def train():
 
             if score > record:
                 record = score
-                agent.model.save()
+                #agent.model.save()
 
             print('Game', agent.n_games, 'Score', score, 'Record:', record)
+            
             
             plot_scores.append(score)
             total_score.append(score)

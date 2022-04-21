@@ -40,6 +40,17 @@ def sign_up():
 
     return render_template("sign_up.html")
 
-@auth.route('/snake')
+@auth.route('/snake', methods = ['GET', 'POST'])
+
 def snake():
     return render_template("reinforcement_snake.html", StartSnake = StartSnake)
+
+def upload_file():
+   return render_template('upload.html')
+	
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['file']
+      f.save(f.filename)
+      return 'file uploaded successfully'
+    
