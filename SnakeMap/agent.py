@@ -108,7 +108,7 @@ class Agent:
                     #move = random.randint(0, 2)
                    # final_move[move] = 1
 
-        if random.randint(0, 250) < self.epsilon:
+        if random.randint(0, 150) < self.epsilon:
             move = random.randint(0, 2)
             final_move[move] = 1
         else:
