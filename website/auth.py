@@ -43,7 +43,7 @@ def sign_up():
 @auth.route('/snake', methods = ['GET', 'POST'])
 
 def snake():
-    return render_template("reinforcement_snake.html", StartSnake = StartSnake())
+    return render_template("reinforcement_snake.html", StartSnake = StartSnake)
 
 def upload_file():
    return render_template('upload.html')
