@@ -29,12 +29,12 @@ BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
 BLACK = (0,0,0)
 
-BLOCK_SIZE = 20
+BLOCK_SIZE = 80
 SPEED = 20
 
 class SnakeGameAI:
     
-    def __init__(self, w=240, h=240):
+    def __init__(self, w=320, h=320):
         self.w = w
         self.h = h
         # init display
@@ -92,13 +92,19 @@ class SnakeGameAI:
         game_over = False
         if self.is_collision() or self.frame_iteration > 100*len(self.snake):
             game_over = True
-            reward = -8
+            reward = -15
             return reward, game_over, self.score
             
         # 4. place new food or just move
         if self.head == self.food:
             self.score += 1
-            reward = 14
+            reward = 8
+
+            if len(self.snake) == self.w * self.h / BLOCK_SIZE**2:
+                print(f"Reached max length {len(self.snake)}")
+                game_over = True
+                return reward, game_over, self.score
+            
             self._place_food()
         else:
             self.snake.pop()
