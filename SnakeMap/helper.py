@@ -5,11 +5,11 @@ import numpy as np
 
 temp_list = []
 temp_list2 = []
-with open('h256,r500.csv', newline='') as csvfile:
+with open('2h,-12,+10,h256,r1000.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
         for row in spamreader:
             temp_list = np.array(row)
-with open('-10,+12,h256,r500.csv', newline='') as csvfile:
+with open('2h,-15,+8,h256,r1000.csv', newline='') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
         for row in spamreader:
             temp_list2 = np.array(row)
@@ -22,7 +22,7 @@ new_list2 = [float(x) for x in temp_list2]
 plt.ion()
 
 def plot(scores, mean_scores):
-    with open('-12,+10,h256,r700.csv', 'w', newline='') as csvfile:
+    with open('2h,-12,+12,h128,r1000.csv', 'w', newline='') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=' ',
                             quotechar='|', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow(mean_scores)

@@ -98,7 +98,7 @@ class SnakeGameAI:
         # 4. place new food or just move
         if self.head == self.food:
             self.score += 1
-            reward = 10
+            reward = 12
 
             if len(self.snake) == self.w * self.h / BLOCK_SIZE**2:
                 print(f"Reached max length {len(self.snake)}")
